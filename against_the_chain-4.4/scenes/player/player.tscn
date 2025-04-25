@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://boxys03inonas"]
+
+[ext_resource type="Script" uid="uid://doejyoaax7tpn" path="res://scenes/player/player.gd" id="1_dovo2"]
+[ext_resource type="Texture2D" uid="uid://cliu0m6r0pbc3" path="res://assets/player.png" id="2_dovo2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
+radius = 73.0548
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_dovo2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, -6)
+rotation = 1.5708
+texture = ExtResource("2_dovo2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dovo2")
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ShootingPoints" type="Node2D" parent="."]
+position = Vector2(116, 28)
+
+[node name="ShootingPoint" type="Marker2D" parent="ShootingPoints"]
+position = Vector2(19, -28)
+
+[node name="ShootingPoint2" type="Marker2D" parent="ShootingPoints"]
+position = Vector2(25, -15)
+rotation = 3.14159
+scale = Vector2(3554.11, 5938.15)
+
+[node name="ShootingPoint3" type="Marker2D" parent="ShootingPoints"]
+position = Vector2(20, -2)
+scale = Vector2(1.26317e+07, 3.52616e+07)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

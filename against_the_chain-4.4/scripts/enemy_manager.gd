@@ -1,15 +1,16 @@
 extends Node2D
+
+@export var max_enemies = 5
 var enemy_scene: PackedScene
 var enemies := []
-@export var max_enemies = 20
+
 
 func _ready():
-	print('manager is ready')
 	enemy_scene = preload("res://scenes/enemy/enemy.tscn")
 	$SpawnTimer.start()
 
 func spawn_enemy(position: Vector2):
-	if enemies.size() > max_enemies:
+	if enemies.size() >= max_enemies:
 		return
 	var enemy = enemy_scene.instantiate()
 	enemy.position = position
@@ -27,7 +28,5 @@ func clear_all_enemies():
 		enemy.queue_free()
 	enemies.clear()
 	
-func _on_enemy_died(enemy: Area2D):
-	print("dead signal")
-	print(enemies.size())
+func _on_enemy_died(enemy: CharacterBody2D):
 	remove_enemy(enemy)

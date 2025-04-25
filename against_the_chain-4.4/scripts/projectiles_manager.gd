@@ -1,11 +1,11 @@
 extends Node2D
-class_name Manager 
+
 var projectile_scene: PackedScene
 var projectiles := []
+
 @export var max_projectiles = 200
 
 func _ready():
-	print('manager is ready')
 	projectile_scene = preload("res://scenes/projectile/projectile.tscn")
 
 func spawn_projectile(position: Vector2, direction:Vector2):

@@ -1,5 +1,9 @@
 extends Node2D
 
+const WORLD_WIDTH = 8046
+const WORLD_HEIGHT = 8046
+const ZOOM_MAX = 2
+const ZOOM_MIN = 1
 # Preloads
 const projectile: PackedScene = preload("res://scenes/projectile/projectile.tscn")
 const enemy: PackedScene = preload("res://scenes/enemy/enemy.tscn")
@@ -7,12 +11,9 @@ const EnemyManager = preload("res://scripts/enemy_manager.gd")
 
 # Values
 @export var zoom_speed = 0.1
+@export var enemy_spawn_radius = 1300
 var camera: Camera2D
-var ZOOM_MAX =2
-var ZOOM_MIN =1
 var can_spawn = true
-const WORLD_WIDTH = 8046
-const WORLD_HEIGHT = 8046
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,22 +34,18 @@ func _input(event: InputEvent) -> void:
 					camera.zoom += Vector2(zoom_speed, zoom_speed)
 
 
-#func _on_player_player_shoot(pos: Variant, direction: Variant) -> void:
-	#var projectile = projectile.instantiate()
-	#projectile.position = pos
-	#projectile.direction_to_shoot = direction
-	#projectile.rotation_degrees = rad_to_deg(direction.angle()) + 90
-	#projectile.add_to_group("projectiles")
-	#$Projectiles.add_child(projectile)
-
 func _spawn_enemies():
 	if can_spawn:
-		$EnemyManager.spawn_enemy(Vector2.ZERO)
+		var spawm_position = get_random_point_in_circle($Player.position, enemy_spawn_radius)
+		$EnemyManager.spawn_enemy(spawm_position)
 		can_spawn = false
-
-#func _spawn_projectiles():
-	#pass
 	
 
 func _on_spawn_timer_timeout() -> void:
 	can_spawn = true
+
+func get_random_point_in_circle(origin: Vector2, radius: float) -> Vector2:
+	var angle = randf() * TAU  # TAU = 2 * PI
+	var r = sqrt(randf()) * radius
+	var offset = Vector2(cos(angle), sin(angle)) * r
+	return origin + offset

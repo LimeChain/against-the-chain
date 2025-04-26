@@ -8,7 +8,7 @@ const ZOOM_MIN = 1
 const projectile: PackedScene = preload("res://scenes/projectiles/projectile.tscn")
 const enemy: PackedScene = preload("res://scenes/enemies/enemy/enemy.tscn")
 const EnemyManager = preload("res://scripts/enemy_manager.gd")
-
+const obstacle: PackedScene = preload("res://scenes/obstacles/obstacle.tscn")
 # Values
 @export var zoom_speed = 0.1
 @export var enemy_spawn_radius = 1300
@@ -49,3 +49,7 @@ func get_random_point_in_circle(origin: Vector2, radius: float) -> Vector2:
 	var r = sqrt(randf()) * radius
 	var offset = Vector2(cos(angle), sin(angle)) * r
 	return origin + offset
+	
+func add_random_obstacles () -> void: 
+	
+	pass

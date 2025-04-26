@@ -10,7 +10,7 @@ var takes_damage = false
 var damage_taken_amount = 0
 var time_since_damage = 0
 var projectile_damage = 5
-
+var normal: Vector2
 signal player_shoot(pos:Vector2, direction:Vector2)
 signal player_dead()
 
@@ -23,7 +23,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var normal: Vector2 = Input.get_vector("left", "right","up","down")
+	normal = Input.get_vector("left", "right","up","down")
 	handle_direction()
 	velocity = normal * SPEED
 	move_and_slide()
@@ -77,29 +77,46 @@ func handle_direction():
 	var animation = $AnimatedSprite2D
 	var shooting_point = $ShootingPoints/ShootingPoint
 	var direction = (get_local_mouse_position()).normalized()
-	print(direction)
+
 	if direction.x < 0 and ((direction.y > 0 and direction.y < 0.33) or ((direction.y < 0 and direction.y > -0.33))):
-		animation.play("WalkLeft")
+		if normal != Vector2.ZERO:
+			animation.play("WalkLeft")
+		else:
+			animation.play("Left")
 		shooting_point.position.x = -175
 		shooting_point.position.y = -70
 	elif direction.x < 0 and direction.y < -0.33 and direction.y > -0.66:
-		animation.play("WalkUpLeft")
+		if normal != Vector2.ZERO:
+			animation.play("WalkUpLeft")
+		else:
+			animation.play("UpLeft")
 		shooting_point.position.x = -175
 		shooting_point.position.y = -70
 	elif direction.y < 0 and ((direction.x > 0 and direction.x < 0.66) or ((direction.x < 0 and direction.x > -0.66))):
-		animation.play("WalkUp")
+		if normal != Vector2.ZERO:
+			animation.play("WalkUp")
+		else:
+			animation.play("Up")
 		shooting_point.position.x = -119
 		shooting_point.position.y = -117
-	elif direction.x > 0 and direction.y > 0.33 and direction.y < 0.66:
-		animation.play("WalkUpLeft")
+	elif direction.x > 0 and direction.y < -0.33 and direction.y > -0.66:
+		if normal != Vector2.ZERO:
+			animation.play("WalkUpRight")
+		else:
+			animation.play("UpRight")
 		shooting_point.position.x = -175
 		shooting_point.position.y = -70
-	elif direction.x > 0 and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
-		#sprite_element.texture = preload("res://assets/player/Marine-E.svg")
+	elif direction.x > 0 and ((direction.y > 0 and direction.y < 0.33) or ((direction.y < 0 and direction.y > -0.66))):
+		if normal!=Vector2.ZERO:
+			animation.play("WalkRight")
+		else:
+			animation.play("Right")
 		shooting_point.position.x = -64
 		shooting_point.position.y = -68
-	
-	elif direction.y > 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
-		#sprite_element.texture = preload("res://assets/player/Marine-S.svg")
+	elif direction.y > 0 and ((direction.x > 0 and direction.x < 0.66) or ((direction.x < 0 and direction.x > -0.66))):
+		if normal != Vector2.ZERO:
+			animation.play("WalkDown")
+		else:
+			animation.play("Down")
 		shooting_point.position.x = -116
-		shooting_point.position.y = -9
+		shooting_point.position.y = -95

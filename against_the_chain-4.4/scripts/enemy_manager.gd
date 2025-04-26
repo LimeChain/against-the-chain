@@ -14,7 +14,6 @@ func _ready():
 	$SpawnTimer.start()
 
 func spawn_enemy(position: Vector2):
-	print(is_captain_ritual)
 	if enemies.size() >= max_enemies:
 		return
 	var enemy
@@ -56,6 +55,5 @@ func find_captain(enemies:Array):
 			return enemy
 			
 func _on_enemy_shoot(position:Vector2, enemy_pos:Vector2):
-	print("in on enemy shoot")
 	var direction = ($"../Player".position - enemy_pos).normalized()
 	$"../EnemyProjectileManager".spawn_projectile(position,direction)

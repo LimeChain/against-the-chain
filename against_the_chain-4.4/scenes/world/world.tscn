@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://b6rb4i3s3du8h" path="res://scripts/projectiles_manager.gd" id="3_6m72w"]
 [ext_resource type="Script" uid="uid://q7en5cnwmt2f" path="res://scripts/enemy_manager.gd" id="4_6m72w"]
 [ext_resource type="Texture2D" uid="uid://yijspmwdreab" path="res://assets/terrain/Tiles.svg" id="5_v5dby"]
-[ext_resource type="Script" path="res://scenes/world/web_socket_client.gd" id="7_bq33v"]
-[ext_resource type="Script" path="res://scenes/world/enemy_projectile_manager.gd" id="8_j2gmx"]
+[ext_resource type="Script" uid="uid://d30bj00gstewb" path="res://scenes/world/web_socket_client.gd" id="7_bq33v"]
+[ext_resource type="Script" uid="uid://h4frjn33byj1" path="res://scenes/world/enemy_projectile_manager.gd" id="8_j2gmx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t5ptc"]
 texture = ExtResource("5_v5dby")
@@ -141,6 +141,14 @@ script = ExtResource("7_bq33v")
 
 [node name="EnemyProjectileManager" type="Node2D" parent="."]
 script = ExtResource("8_j2gmx")
+
+[node name="SpawnLimits" type="Node2D" parent="."]
+
+[node name="NorthWest" type="Marker2D" parent="SpawnLimits"]
+position = Vector2(-1475, -1175)
+
+[node name="SouthEast" type="Marker2D" parent="SpawnLimits"]
+position = Vector2(3892, 2666)
 
 [connection signal="player_shoot" from="Player" to="ProjectileManager" method="_on_player_player_shoot"]
 [connection signal="timeout" from="EnemyManager/SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://crsc0fsrwcswu"]
+[gd_scene load_steps=13 format=4 uid="uid://crsc0fsrwcswu"]
 
 [ext_resource type="Script" uid="uid://dp7i1uvgr4b81" path="res://scenes/world/world.gd" id="1_1fp7r"]
 [ext_resource type="PackedScene" uid="uid://boxys03inonas" path="res://scenes/player/player.tscn" id="1_dphjl"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://q7en5cnwmt2f" path="res://scripts/enemy_manager.gd" id="4_6m72w"]
 [ext_resource type="Texture2D" uid="uid://yijspmwdreab" path="res://assets/terrain/Tiles.svg" id="5_v5dby"]
 [ext_resource type="Script" uid="uid://d30bj00gstewb" path="res://scenes/world/web_socket_client.gd" id="7_bq33v"]
+[ext_resource type="PackedScene" uid="uid://dx2vragtt267t" path="res://scenes/loading_screen/loading_screen.tscn" id="8_1yooq"]
 [ext_resource type="Script" uid="uid://h4frjn33byj1" path="res://scenes/world/enemy_projectile_manager.gd" id="8_j2gmx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t5ptc"]
@@ -150,5 +151,9 @@ position = Vector2(-1475, -1175)
 [node name="SouthEast" type="Marker2D" parent="SpawnLimits"]
 position = Vector2(3892, 2666)
 
+[node name="LoadingScreen" parent="." instance=ExtResource("8_1yooq")]
+scale = Vector2(1.14473, 1.29856)
+
 [connection signal="player_shoot" from="Player" to="ProjectileManager" method="_on_player_player_shoot"]
 [connection signal="timeout" from="EnemyManager/SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="socket_connected" from="Solana/WebSocketClient" to="." method="_on_web_socket_client_socket_connected"]

@@ -14,13 +14,15 @@ const obstacle: PackedScene = preload("res://scenes/obstacles/obstacle.tscn")
 @export var enemy_spawn_radius = 1300
 var camera: Camera2D
 var can_spawn = true
-
+var has_game_started = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	camera = $Player/Camera2D
 	camera.zoom = Vector2(ZOOM_MIN, ZOOM_MIN)
 
 func _process(delta:float):
+	if not has_game_started:
+		return
 	_spawn_enemies()
 
 func _input(event: InputEvent) -> void:
@@ -60,3 +62,8 @@ func get_random_point_in_rect(p1: Vector2, p2: Vector2) -> Vector2:
 func add_random_obstacles () -> void: 
 	
 	pass
+
+
+func _on_web_socket_client_socket_connected() -> void:
+	$LoadingScreen.visible = false
+	has_game_started = true

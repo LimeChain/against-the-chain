@@ -27,6 +27,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not $"..".has_game_started:
+		return
 	normal = Input.get_vector("left", "right","up","down")
 	handle_direction()
 	velocity = normal * SPEED

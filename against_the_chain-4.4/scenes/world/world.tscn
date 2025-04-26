@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://crsc0fsrwcswu"]
+
+[ext_resource type="Script" uid="uid://dp7i1uvgr4b81" path="res://scenes/world/world.gd" id="1_1fp7r"]
+[ext_resource type="PackedScene" uid="uid://boxys03inonas" path="res://scenes/player/player.tscn" id="1_dphjl"]
+[ext_resource type="Script" uid="uid://b6rb4i3s3du8h" path="res://scripts/projectiles_manager.gd" id="3_6m72w"]
+[ext_resource type="Script" uid="uid://q7en5cnwmt2f" path="res://scripts/enemy_manager.gd" id="4_6m72w"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_1fp7r")
+
+[node name="Player" parent="." instance=ExtResource("1_dphjl")]
+
+[node name="ProjectileManager" type="Node2D" parent="."]
+script = ExtResource("3_6m72w")
+
+[node name="EnemyManager" type="Node2D" parent="."]
+script = ExtResource("4_6m72w")
+
+[node name="SpawnTimer" type="Timer" parent="EnemyManager"]
+wait_time = 2.0
+
+[connection signal="player_shoot" from="Player" to="ProjectileManager" method="_on_player_player_shoot"]
+[connection signal="timeout" from="EnemyManager/SpawnTimer" to="." method="_on_spawn_timer_timeout"]

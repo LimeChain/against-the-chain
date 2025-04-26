@@ -15,8 +15,7 @@ interface BlockState {
 export class SolanaController {
   private readonly RPC_ENDPOINTS = [
     'https://mainnet.helius-rpc.com/?api-key=7148b4c3-6dd9-48fe-bb75-e052f07dce11',
-    'https://api.mainnet-beta.solana.com',
-    'https://solana-api.projectserum.com'
+    'https://api.mainnet-beta.solana.com'
   ];
   private currentEndpointIndex = 0;
   private io: SocketServer;
@@ -114,8 +113,8 @@ export class SolanaController {
 
   private async updateBlockState() {
     const blockState = await this.getCurrentBlockState();
-    if (blockState) {
-      logger.info('Current block state', blockState);
+    if (blockState !== null) {
+      logger.info('Current block state: ' + JSON.stringify(blockState));
       this.io.emit('blockUpdate', blockState);
     }
   }
@@ -141,5 +140,10 @@ export class SolanaController {
       clearInterval(this.updateInterval);
       this.updateInterval = null;
     }
+  }
+
+  public getBlockHistory(): BlockState[] {
+    // TODO: Implement actual block history storage and retrieval
+    return [];
   }
 } 

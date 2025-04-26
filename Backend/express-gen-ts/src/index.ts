@@ -11,7 +11,7 @@ import { httpServer } from './server';
 const SERVER_START_MSG = ('Express server started on port: ' + 
   ENV.Port.toString());
 
-const port = 3001;
+const port = process.env.PORT ?? 3000;
 
 httpServer.listen(port, () => {
   console.log(`Server running on port ${port}`);

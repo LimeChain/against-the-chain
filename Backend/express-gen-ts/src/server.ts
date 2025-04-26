@@ -6,14 +6,14 @@ import logger from 'jet-logger';
 import { createServer } from 'http';
 import { Server as SocketServer } from 'socket.io';
 
-import BaseRouter from '@src/routes';
-import { initializeSolanaRoutes } from '@src/routes/solana.routes';
+import BaseRouter from './routes';
+import { initializeSolanaRoutes } from './routes/solana.routes';
 
-import Paths from '@src/common/constants/Paths';
-import ENV from '@src/common/constants/ENV';
-import HttpStatusCodes from '@src/common/constants/HttpStatusCodes';
-import { RouteError } from '@src/common/util/route-errors';
-import { NodeEnvs } from '@src/common/constants';
+import Paths from './common/constants/Paths';
+import ENV from './common/constants/ENV';
+import HttpStatusCodes from './common/constants/HttpStatusCodes';
+import { RouteError } from './common/util/route-errors';
+import { NodeEnvs } from './common/constants';
 
 
 /******************************************************************************

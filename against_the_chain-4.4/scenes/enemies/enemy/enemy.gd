@@ -18,10 +18,12 @@ signal shoot (position: Vector2, enemy_pos: Vector2)
 
 func _ready() -> void:
 	$Area2D.area_entered.connect(_on_area_entered)
+	$Area2D.area_exited.connect(_on_area_exited)
 	player = get_node("/root/World/Player")
 	# draw the bar once at start
 	queue_redraw()
 	$ShootTimer.start()
+
 
 func _process(delta: float) -> void:
 	handle_direction(player.position.normalized())
@@ -58,26 +60,37 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("projectiles"):
 		area.destroy.emit(area)
 		health = max(health - damage, 0)
-		queue_redraw()      # ← schedule a redraw of _draw()	
+		speed /= 2
+		queue_redraw()
 		if health == 0:
-			dead.emit(self)
-
+			speed = 0
+			$AnimatedSprite2D.animation_looped.connect(func ():
+				dead.emit(self)
+			)
+			
+func _on_area_exited(area: Area2D):
+	if area.is_in_group("projectiles"):
+		speed *= 2
+		
 func handle_direction(direction: Vector2):
 	var animation = $AnimatedSprite2D
-	if direction.x < 0:
+	if health >0 and direction.x < 0:
 	#and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
 
 		animation.play("WalkLeft")
-	elif direction.x > 0:
+	elif health >0 and direction.x > 0:
 	#and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
 
 		animation.play("WalkRight")
-	elif direction.y < 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
+	elif health >0 and direction.y < 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
 		pass
-	elif direction.y > 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
+	elif health >0 and direction.y > 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
 		pass
-
-
+	elif health <=0 and direction.x > 0: 
+		animation.play("DestroyRight")
+	elif health <=0 and direction.x < 0: 
+		animation.play("DestroyLeft")
+		
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
 	

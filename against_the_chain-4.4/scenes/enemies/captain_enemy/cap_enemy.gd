@@ -11,6 +11,7 @@ const BAR_WIDTH  := 100
 const BAR_HEIGHT := 12
 const BAR_OFFSET := Vector2(0, -128)
 var can_move := false
+var sprite_direction:Vector2
 
 signal dead(enemy: CharacterBody2D)
 signal shoot (position: Vector2, enemy_pos: Vector2)
@@ -54,7 +55,10 @@ func _on_area_entered(area: Area2D) -> void:
 		health = max(health - damage, 0)
 		queue_redraw()      # ← schedule a redraw of _draw()	
 		if health == 0:
-			dead.emit(self)
+			$AnimatedSprite2D.animation_looped.connect(func ():
+				dead.emit(self)
+			)
+		
 
 
 func _on_captain_charge_timer_timeout() -> void:
@@ -64,19 +68,23 @@ func _on_captain_charge_timer_timeout() -> void:
 
 func handle_direction(direction: Vector2):
 	var animation = $AnimatedSprite2D
-	if direction.x < 0:
+	print("health", health)
+	if health > 0 and direction.x < 0:
 	#and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
-
+		sprite_direction = Vector2.LEFT
 		animation.play("WalkLeft")
-	elif direction.x > 0:
+	elif health > 0 and direction.x > 0:
 	#and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
-
+		sprite_direction = Vector2.RIGHT
 		animation.play("WalkRight")
-	elif direction.y < 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
+	elif health > 0 and direction.y < 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
 		pass
-	elif direction.y > 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
+	elif health > 0 and direction.y > 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
 		pass
-
+	elif health <=0 and direction.x > 0:
+		animation.play("DestroyRight")
+	elif health <=0 and direction.x < 0:
+		animation.play("DestroyLeft")
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true

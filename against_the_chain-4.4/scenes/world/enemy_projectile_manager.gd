@@ -7,11 +7,14 @@ var projectiles := []
 
 func _ready():
 	projectile_scene = preload("res://scenes/projectiles/projectile.tscn")
+	
 
 func spawn_projectile(position: Vector2, direction:Vector2):
 	if projectiles.size() > max_projectiles:
 		return
 	var projectile = projectile_scene.instantiate()
+	projectile.get_child(1).visible = true
+	projectile.get_child(3).visible = false
 	projectile.position = position
 	projectile.direction_to_shoot = direction
 	projectile.rotation_degrees = rad_to_deg(direction.angle()) + 90

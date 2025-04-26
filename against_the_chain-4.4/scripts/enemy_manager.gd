@@ -49,6 +49,8 @@ func _on_enemy_died(enemy: CharacterBody2D):
 		is_captain_ritual = false
 	remove_enemy(enemy)
 
+	
+
 func find_captain(enemies:Array):
 	for enemy in enemies:
 		if enemy.name == "CaptainEnemy":

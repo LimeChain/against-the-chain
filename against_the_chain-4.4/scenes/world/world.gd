@@ -4,6 +4,9 @@ const WORLD_WIDTH = 8046
 const WORLD_HEIGHT = 8046
 const ZOOM_MAX = 2
 const ZOOM_MIN = 1
+const BAR_WIDTH  := 100
+const BAR_HEIGHT := 12
+const BAR_OFFSET := Vector2(0, -128)
 # Preloads
 const projectile: PackedScene = preload("res://scenes/projectiles/projectile.tscn")
 const enemy: PackedScene = preload("res://scenes/enemies/enemy/enemy.tscn")
@@ -19,6 +22,7 @@ var has_game_started = false
 func _ready() -> void:
 	camera = $Player/Camera2D
 	camera.zoom = Vector2(ZOOM_MIN, ZOOM_MIN)
+	
 
 func _process(delta:float):
 	if not has_game_started:

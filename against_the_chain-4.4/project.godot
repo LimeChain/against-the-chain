@@ -16,12 +16,13 @@ config/features=PackedStringArray("4.4", "GL Compatibility")
 
 [autoload]
 
-RPCManager="*res://scripts/rpc-manager.gd"
+MultiplayerManager="*res://scripts/multiplayer_manager.gd"
 
 [global_group]
 
 enemies="The evil enemies"
 projectiles=""
+enemy_projectiles=""
 
 [input]
 

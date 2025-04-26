@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4g2vnbt1kwce"]
+
+[ext_resource type="Script" uid="uid://d3cjs8u3jv63g" path="res://scenes/projectiles/projectile.gd" id="1_wndne"]
+[ext_resource type="Texture2D" uid="uid://b0tdj2jx8pe26" path="res://assets/projectile.png" id="2_l3el7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2dulq"]
+radius = 8.0
+height = 168.0
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_wndne")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_2dulq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_l3el7")
+
+[node name="DestructorTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="DestructorTimer" to="." method="_on_destructor_timer_timeout"]

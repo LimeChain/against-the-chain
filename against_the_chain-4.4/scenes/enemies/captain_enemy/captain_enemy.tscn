@@ -1,0 +1,82 @@
+[gd_scene load_steps=13 format=3 uid="uid://cu58qskjjpy6u"]
+
+[ext_resource type="Script" uid="uid://b80eniafhfy3f" path="res://scenes/enemies/captain_enemy/cap_enemy.gd" id="1_sqq2t"]
+[ext_resource type="Texture2D" uid="uid://c0tdgj3pvhu14" path="res://assets/mobs/Mob1-E-10.svg" id="2_rxyk2"]
+[ext_resource type="Texture2D" uid="uid://dl46wo7rjomag" path="res://assets/mobs/Mob1-W-10.svg" id="3_m8qbf"]
+[ext_resource type="Texture2D" uid="uid://cddnf80m10xno" path="res://assets/mobs/Mob1-W-20.svg" id="4_cexfg"]
+[ext_resource type="Texture2D" uid="uid://bm1i5otgngamo" path="res://assets/mobs/Mob1-E-20.svg" id="5_joqlv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a3pup"]
+radius = 133.015
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_40wdo"]
+radius = 144.056
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqv0g"]
+atlas = ExtResource("3_m8qbf")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yoqnv"]
+atlas = ExtResource("4_cexfg")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ryfey"]
+atlas = ExtResource("2_rxyk2")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r88tt"]
+atlas = ExtResource("5_joqlv")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7e7md"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqv0g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yoqnv")
+}],
+"loop": true,
+"name": &"WalkLeft",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ryfey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r88tt")
+}],
+"loop": true,
+"name": &"WalkRight",
+"speed": 5.0
+}]
+
+[node name="CaptainEnemy" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_sqq2t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a3pup")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_40wdo")
+
+[node name="CaptainChargeTimer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_7e7md")
+animation = &"WalkRight"
+
+[node name="ShootingPoint" type="Marker2D" parent="."]
+position = Vector2(166, 2)
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="CaptainChargeTimer" to="." method="_on_captain_charge_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

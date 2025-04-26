@@ -6,7 +6,7 @@ var projectiles := []
 @export var max_projectiles = 200
 
 func _ready():
-	projectile_scene = preload("res://scenes/projectile/projectile.tscn")
+	projectile_scene = preload("res://scenes/projectiles/projectile.tscn")
 
 func spawn_projectile(position: Vector2, direction:Vector2):
 	if projectiles.size() > max_projectiles:

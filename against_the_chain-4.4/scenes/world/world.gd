@@ -5,10 +5,10 @@ const WORLD_HEIGHT = 8046
 const ZOOM_MAX = 2
 const ZOOM_MIN = 1
 # Preloads
-const projectile: PackedScene = preload("res://scenes/projectile/projectile.tscn")
-const enemy: PackedScene = preload("res://scenes/enemy/enemy.tscn")
+const projectile: PackedScene = preload("res://scenes/projectiles/projectile.tscn")
+const enemy: PackedScene = preload("res://scenes/enemies/enemy/enemy.tscn")
 const EnemyManager = preload("res://scripts/enemy_manager.gd")
-
+const obstacle: PackedScene = preload("res://scenes/obstacles/obstacle.tscn")
 # Values
 @export var zoom_speed = 0.1
 @export var enemy_spawn_radius = 1300
@@ -19,7 +19,6 @@ var can_spawn = true
 func _ready() -> void:
 	camera = $Player/Camera2D
 	camera.zoom = Vector2(ZOOM_MIN, ZOOM_MIN)
-	RPCManager.connect("slot_message_received", Callable(self, "_on_slot_stats"))
 
 func _process(delta:float):
 	_spawn_enemies()
@@ -50,3 +49,7 @@ func get_random_point_in_circle(origin: Vector2, radius: float) -> Vector2:
 	var r = sqrt(randf()) * radius
 	var offset = Vector2(cos(angle), sin(angle)) * r
 	return origin + offset
+	
+func add_random_obstacles () -> void: 
+	
+	pass

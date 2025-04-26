@@ -19,6 +19,7 @@ var can_spawn = true
 func _ready() -> void:
 	camera = $Player/Camera2D
 	camera.zoom = Vector2(ZOOM_MIN, ZOOM_MIN)
+	RPCManager.connect("slot_message_received", Callable(self, "_on_slot_stats"))
 
 func _process(delta:float):
 	_spawn_enemies()

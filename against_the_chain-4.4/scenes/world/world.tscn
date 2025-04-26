@@ -19,5 +19,7 @@ script = ExtResource("4_6m72w")
 [node name="SpawnTimer" type="Timer" parent="EnemyManager"]
 wait_time = 2.0
 
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+
 [connection signal="player_shoot" from="Player" to="ProjectileManager" method="_on_player_player_shoot"]
 [connection signal="timeout" from="EnemyManager/SpawnTimer" to="." method="_on_spawn_timer_timeout"]

@@ -1,6 +1,6 @@
 extends Node2D
  
-@export var max_enemies = 10
+@export var max_enemies = 100
 var enemy_scene: PackedScene
 var captain_enemy_scene: PackedScene
 var enemies := []
@@ -10,6 +10,7 @@ var is_captain_ritual := false
 func _ready():
 	enemy_scene = preload("res://scenes/enemies/enemy/enemy.tscn")
 	captain_enemy_scene = preload("res://scenes/enemies/captain_enemy/captain_enemy.tscn")
+	$SpawnTimer.wait_time = randf_range(0.5, 3.0)
 	$SpawnTimer.start()
 
 func spawn_enemy(position: Vector2):
@@ -30,7 +31,8 @@ func spawn_enemy(position: Vector2):
 	else:
 		enemy.position = position
 	enemy.add_to_group("enemies")
-	enemy.dead.connect(_on_enemy_died) 
+	enemy.dead.connect(_on_enemy_died)
+	enemy.shoot.connect(_on_enemy_shoot)
 	enemies.append(enemy)
 	add_child(enemy)
 
@@ -52,3 +54,8 @@ func find_captain(enemies:Array):
 	for enemy in enemies:
 		if enemy.name == "CaptainEnemy":
 			return enemy
+			
+func _on_enemy_shoot(position:Vector2, enemy_pos:Vector2):
+	print("in on enemy shoot")
+	var direction = ($"../Player".position - enemy_pos).normalized()
+	$"../EnemyProjectileManager".spawn_projectile(position,direction)

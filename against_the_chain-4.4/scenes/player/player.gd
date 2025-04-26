@@ -9,7 +9,7 @@ var health: int
 var takes_damage = false
 var damage_taken_amount = 0
 var time_since_damage = 0
-
+var projectile_damage = 5
 
 signal player_shoot(pos:Vector2, direction:Vector2)
 signal player_dead()
@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 	velocity = normal * SPEED
 	move_and_slide()
 	shoot(delta)
-	#look_at(get_global_mouse_position())
+
 	if time_since_damage >= DAMAGE_INTERVAL:
 		time_since_damage = 0
 		if takes_damage:
@@ -61,7 +61,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		var damage = enemy.damage
 		damage_taken_amount += damage
 		takes_damage = true
-
+	if area.is_in_group("enemy_projectiles"):
+		health -= projectile_damage
+		area.queue_free()
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	var enemy = area.get_parent()
@@ -70,23 +72,34 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		damage_taken_amount -= damage
 		takes_damage = false
 
+
 func handle_direction():
-	var sprite_element: Sprite2D = $Sprite2D
+	var animation = $AnimatedSprite2D
 	var shooting_point = $ShootingPoints/ShootingPoint
 	var direction = (get_local_mouse_position()).normalized()
-	if direction.x < 0 and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
-		sprite_element.texture = preload("res://assets/player/Marine-W.svg")
+	print(direction)
+	if direction.x < 0 and ((direction.y > 0 and direction.y < 0.33) or ((direction.y < 0 and direction.y > -0.33))):
+		animation.play("WalkLeft")
+		shooting_point.position.x = -175
+		shooting_point.position.y = -70
+	elif direction.x < 0 and direction.y < -0.33 and direction.y > -0.66:
+		animation.play("WalkUpLeft")
+		shooting_point.position.x = -175
+		shooting_point.position.y = -70
+	elif direction.y < 0 and ((direction.x > 0 and direction.x < 0.66) or ((direction.x < 0 and direction.x > -0.66))):
+		animation.play("WalkUp")
+		shooting_point.position.x = -119
+		shooting_point.position.y = -117
+	elif direction.x > 0 and direction.y > 0.33 and direction.y < 0.66:
+		animation.play("WalkUpLeft")
 		shooting_point.position.x = -175
 		shooting_point.position.y = -70
 	elif direction.x > 0 and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
-		sprite_element.texture = preload("res://assets/player/Marine-E.svg")
+		#sprite_element.texture = preload("res://assets/player/Marine-E.svg")
 		shooting_point.position.x = -64
 		shooting_point.position.y = -68
-	elif direction.y < 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
-		sprite_element.texture = preload("res://assets/player/Marine-N.svg")
-		shooting_point.position.x = -119
-		shooting_point.position.y = -117
+	
 	elif direction.y > 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
-		sprite_element.texture = preload("res://assets/player/Marine-S.svg")
+		#sprite_element.texture = preload("res://assets/player/Marine-S.svg")
 		shooting_point.position.x = -116
 		shooting_point.position.y = -9

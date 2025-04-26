@@ -5,13 +5,15 @@ extends CharacterBody2D
 var health               := max_health
 @export var damage       := 1
 var player
-
+var can_shoot := true
 # Health‐bar constants
 const BAR_WIDTH  := 100
 const BAR_HEIGHT := 12
 const BAR_OFFSET := Vector2(0, -128)
 var can_move := false
+
 signal dead(enemy: CharacterBody2D)
+signal shoot (position: Vector2, enemy_pos: Vector2)
 
 func _ready() -> void:
 	$Area2D.area_entered.connect(_on_area_entered)
@@ -19,6 +21,7 @@ func _ready() -> void:
 	# draw the bar once at start
 	queue_redraw()
 	$CaptainChargeTimer.start()
+	$ShootTimer.start()
 	
 func _process(delta: float) -> void:
 	handle_direction(player.position.normalized())
@@ -26,6 +29,9 @@ func _process(delta: float) -> void:
 		var direction = (player.position-position).normalized()
 		velocity = direction * speed
 		move_and_slide()
+	if can_shoot:
+		shoot.emit($ShootingPoint.global_position, position)
+		can_shoot = false
 
 func _draw() -> void:
 	 # background
@@ -57,15 +63,20 @@ func _on_captain_charge_timer_timeout() -> void:
 	enemy_manager.is_captain_ritual = false
 
 func handle_direction(direction: Vector2):
-	var sprite_element: Sprite2D = $CaptainEnemyBody/Sprite2D
-	
+	var animation = $AnimatedSprite2D
 	if direction.x < 0:
 	#and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
-		sprite_element.texture = preload("res://assets/mobs/Mob1-W-10.svg")
+
+		animation.play("WalkLeft")
 	elif direction.x > 0:
 	#and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
-		sprite_element.texture = preload("res://assets/mobs/Mob1-E-10.svg")
+
+		animation.play("WalkRight")
 	elif direction.y < 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
 		pass
 	elif direction.y > 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
 		pass
+
+
+func _on_shoot_timer_timeout() -> void:
+	can_shoot = true

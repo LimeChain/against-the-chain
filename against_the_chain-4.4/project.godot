@@ -14,10 +14,6 @@ config/name="against_the_chain"
 run/main_scene="uid://crsc0fsrwcswu"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
-[autoload]
-
-RPCManager="*res://scripts/rpc-manager.gd"
-
 [global_group]
 
 enemies="The evil enemies"

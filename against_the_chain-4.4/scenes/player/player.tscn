@@ -1,24 +1,24 @@
 [gd_scene load_steps=5 format=3 uid="uid://boxys03inonas"]
 
 [ext_resource type="Script" uid="uid://doejyoaax7tpn" path="res://scenes/player/player.gd" id="1_dovo2"]
-[ext_resource type="Texture2D" uid="uid://cliu0m6r0pbc3" path="res://assets/player.png" id="2_dovo2"]
+[ext_resource type="Texture2D" uid="uid://bl7sv0icc4wl7" path="res://assets/player/Marine-S.svg" id="2_dovo2"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dovo2"]
-radius = 73.0548
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dovo2"]
+radius = 31.0
+height = 130.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gmlin"]
-radius = 80.2247
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gmlin"]
+radius = 38.0
+height = 144.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_dovo2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(32, -6)
-rotation = 1.5708
 texture = ExtResource("2_dovo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_dovo2")
+shape = SubResource("CapsuleShape2D_dovo2")
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -27,24 +27,16 @@ wait_time = 0.5
 position = Vector2(116, 28)
 
 [node name="ShootingPoint" type="Marker2D" parent="ShootingPoints"]
-position = Vector2(19, -28)
-
-[node name="ShootingPoint2" type="Marker2D" parent="ShootingPoints"]
-position = Vector2(25, -15)
-rotation = 3.14159
-scale = Vector2(3554.11, 5938.15)
-
-[node name="ShootingPoint3" type="Marker2D" parent="ShootingPoints"]
-position = Vector2(20, -2)
-scale = Vector2(1.26317e+07, 3.52616e+07)
+position = Vector2(-119, -117)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(50, 50)
 position_smoothing_enabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_gmlin")
+shape = SubResource("CapsuleShape2D_gmlin")
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -5,8 +5,8 @@ const WORLD_HEIGHT = 8046
 const ZOOM_MAX = 2
 const ZOOM_MIN = 1
 # Preloads
-const projectile: PackedScene = preload("res://scenes/projectile/projectile.tscn")
-const enemy: PackedScene = preload("res://scenes/enemy/enemy.tscn")
+const projectile: PackedScene = preload("res://scenes/projectiles/projectile.tscn")
+const enemy: PackedScene = preload("res://scenes/enemies/enemy/enemy.tscn")
 const EnemyManager = preload("res://scripts/enemy_manager.gd")
 
 # Values
@@ -19,7 +19,6 @@ var can_spawn = true
 func _ready() -> void:
 	camera = $Player/Camera2D
 	camera.zoom = Vector2(ZOOM_MIN, ZOOM_MIN)
-	RPCManager.connect("slot_message_received", Callable(self, "_on_slot_stats"))
 
 func _process(delta:float):
 	_spawn_enemies()

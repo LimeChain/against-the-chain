@@ -1,8 +1,15 @@
-extends Node
+class_name WebsocketClient extends Node
 
 var client = SocketIOClient
 var backendURL: String
 
+signal block_slot(data: int)
+signal block_blockhash(data: String)
+signal block_reward(data: String)
+signal block_timestamp(data: int)
+signal block_transactionCount (data:int)
+signal block_totalTransactions (data: int)
+signal socket_connected
 func _ready():
 	# prepare URL
 	backendURL = "ec2-34-205-69-138.compute-1.amazonaws.com:80/socket.io/"
@@ -36,13 +43,12 @@ func on_socket_connect(_payload: Variant, _name_space, error: bool):
 	else:
 		print("Socket connected")
 
-func on_socket_event(event_name: String, payload: Variant, _name_space):
-	print("Received ", event_name, " ", payload)
-	# respond hello world
-	#client.socketio_send("hello", "world")
-#
-	#var binary_content: PackedByteArray = "file content or other".to_utf8_buffer()
-	#client.socketio_send_binary("upload", binary_content)
-#
-	## Multiple
-	#client.socketio_send_multiple_binary("upload", [binary_content, binary_content])
+
+
+func on_socket_event(event_name: String, block_data: Variant, _name_space):
+	block_slot.emit(block_data.slot)
+	block_blockhash.emit(block_data.blockhash)
+	block_reward.emit(block_data.reward)
+	block_timestamp.emit(block_data.timestamp)
+	block_transactionCount.emit(block_data.transactionCount)
+	block_totalTransactions.emit(block_data.totalTransactions)

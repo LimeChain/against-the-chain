@@ -36,19 +36,26 @@ func _input(event: InputEvent) -> void:
 
 func _spawn_enemies():
 	if can_spawn:
-		var spawm_position = get_random_point_in_circle($Player.position, enemy_spawn_radius)
-		$EnemyManager.spawn_enemy(spawm_position)
+		var north_west_limit = $SpawnLimits/NorthWest.position
+		var south_east_limit = $SpawnLimits/SouthEast.position
+		var spawn_position = get_random_point_in_rect(north_west_limit, south_east_limit)
+		$EnemyManager.spawn_enemy(spawn_position)
 		can_spawn = false
 	
 
 func _on_spawn_timer_timeout() -> void:
 	can_spawn = true
 
-func get_random_point_in_circle(origin: Vector2, radius: float) -> Vector2:
-	var angle = randf() * TAU  # TAU = 2 * PI
-	var r = sqrt(randf()) * radius
-	var offset = Vector2(cos(angle), sin(angle)) * r
-	return origin + offset
+func get_random_point_in_rect(p1: Vector2, p2: Vector2) -> Vector2:
+	var min_x = min(p1.x, p2.x)
+	var max_x = max(p1.x, p2.x)
+	var min_y = min(p1.y, p2.y)
+	var max_y = max(p1.y, p2.y)
+
+	var random_x = randf_range(min_x, max_x)
+	var random_y = randf_range(min_y, max_y)
+
+	return Vector2(random_x, random_y)
 	
 func add_random_obstacles () -> void: 
 	

@@ -3,6 +3,7 @@ extends CharacterBody2D
 const MAX_HEALTH = 100
 const SPEED = 1000
 const DAMAGE_INTERVAL = 1
+const POSITION_UPDATE_INTERVAL = 0.05  # Update position every 0.1 seconds
 
 var can_shoot:bool = true
 var health: int
@@ -11,6 +12,9 @@ var damage_taken_amount = 0
 var time_since_damage = 0
 var projectile_damage = 5
 var normal: Vector2
+var time_since_position_update = 0
+
+
 signal player_shoot(pos:Vector2, direction:Vector2)
 signal player_dead()
 
@@ -28,7 +32,13 @@ func _process(delta: float) -> void:
 	velocity = normal * SPEED
 	move_and_slide()
 	shoot(delta)
-
+	
+	# Update position periodically
+	time_since_position_update += delta
+	if time_since_position_update >= POSITION_UPDATE_INTERVAL:
+		time_since_position_update = 0
+		_update_position_to_server()
+	
 	if time_since_damage >= DAMAGE_INTERVAL:
 		time_since_damage = 0
 		if takes_damage:
@@ -120,3 +130,11 @@ func handle_direction():
 			animation.play("Down")
 		shooting_point.position.x = -116
 		shooting_point.position.y = -95
+
+func _update_position_to_server() -> void:
+	if multiplayer.multiplayer_peer != null:
+		var player_data = {
+			"position": position,
+			"rotation": rotation
+		}
+		$"/root/MultiplayerManager".update_player_state.rpc(player_data)

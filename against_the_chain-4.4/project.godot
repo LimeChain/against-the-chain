@@ -14,6 +14,10 @@ config/name="against_the_chain"
 run/main_scene="uid://crsc0fsrwcswu"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
+[autoload]
+
+MultiplayerManager="*res://scripts/multiplayer_manager.gd"
+
 [global_group]
 
 enemies="The evil enemies"

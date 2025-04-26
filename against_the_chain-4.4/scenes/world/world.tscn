@@ -5,8 +5,8 @@
 [ext_resource type="Script" uid="uid://b6rb4i3s3du8h" path="res://scripts/projectiles_manager.gd" id="3_6m72w"]
 [ext_resource type="Script" uid="uid://q7en5cnwmt2f" path="res://scripts/enemy_manager.gd" id="4_6m72w"]
 [ext_resource type="Texture2D" uid="uid://yijspmwdreab" path="res://assets/terrain/Tiles.svg" id="5_v5dby"]
-[ext_resource type="Script" uid="uid://d30bj00gstewb" path="res://scenes/world/web_socket_client.gd" id="7_bq33v"]
-[ext_resource type="Script" uid="uid://h4frjn33byj1" path="res://scenes/world/enemy_projectile_manager.gd" id="8_j2gmx"]
+[ext_resource type="Script" path="res://scenes/world/web_socket_client.gd" id="7_bq33v"]
+[ext_resource type="Script" path="res://scenes/world/enemy_projectile_manager.gd" id="8_j2gmx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t5ptc"]
 texture = ExtResource("5_v5dby")

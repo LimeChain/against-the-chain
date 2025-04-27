@@ -9,15 +9,15 @@ var can_shoot := true
 # Health‐bar constants
 const BAR_WIDTH  := 100
 const BAR_HEIGHT := 12
-const BAR_OFFSET := Vector2(0, -160)
+const BAR_OFFSET := Vector2(0, -128)
 var can_move := false
+var sprite_direction:Vector2
 
 signal dead(enemy: CharacterBody2D)
 signal shoot (position: Vector2, enemy_pos: Vector2)
 
 func _ready() -> void:
 	$Area2D.area_entered.connect(_on_area_entered)
-	$Area2D.area_exited.connect(_on_area_exited)
 	player = get_node("/root/World/Player")
 	# draw the bar once at start
 	queue_redraw()
@@ -53,14 +53,14 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("projectiles"):
 		area.destroy.emit(area)
 		health = max(health - damage, 0)
-		speed /= 2
-		queue_redraw()
+		speed/=2
+		queue_redraw()      # ← schedule a redraw of _draw()	
 		if health == 0:
-			speed = 0
+			speed=0
 			$AnimatedSprite2D.animation_looped.connect(func ():
 				dead.emit(self)
 			)
-			
+		
 func _on_area_exited(area: Area2D):
 	if area.is_in_group("projectiles"):
 		speed *= 2
@@ -72,22 +72,23 @@ func _on_captain_charge_timer_timeout() -> void:
 
 func handle_direction(direction: Vector2):
 	var animation = $AnimatedSprite2D
-	if health >0 and direction.x < 0:
+	print("health", health)
+	if health > 0 and direction.x < 0:
 	#and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
-
+		sprite_direction = Vector2.LEFT
 		animation.play("WalkLeft")
-	elif health >0 and direction.x > 0:
+	elif health > 0 and direction.x > 0:
 	#and ((direction.y > 0 and direction.y < 0.5) or ((direction.y < 0 and direction.y > -0.5))):
-
+		sprite_direction = Vector2.RIGHT
 		animation.play("WalkRight")
-	elif health >0 and direction.y < 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
+	elif health > 0 and direction.y < 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
 		pass
-	elif health >0 and direction.y > 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
+	elif health > 0 and direction.y > 0 and ((direction.x > 0 and direction.x < 0.5) or ((direction.x < 0 and direction.x > -0.5))):
 		pass
-	elif health <=0 and direction.x > 0: 
+	elif health <=0 and direction.x > 0:
 		animation.play("DestroyRight")
-	elif health <=0 and direction.x < 0: 
+	elif health <=0 and direction.x < 0:
 		animation.play("DestroyLeft")
-		
+
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true

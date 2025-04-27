@@ -15,7 +15,7 @@ interface BlockState {
 export class SolanaController {
   private readonly RPC_ENDPOINTS = [
     'https://mainnet.helius-rpc.com/?api-key=7148b4c3-6dd9-48fe-bb75-e052f07dce11',
-    'https://api.mainnet-beta.solana.com'
+    // 'https://api.mainnet-beta.solana.com'
   ];
   private currentEndpointIndex = 0;
   private io: SocketServer;

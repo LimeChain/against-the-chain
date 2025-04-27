@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dpr0yat4b378b"
+path="res://.godot/imported/Marine voice (random upon click) - I dont have time for games.mp3-78ca098e21e9fd6eeeffa5a135a38f76.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Marine voice (random upon click) - I dont have time for games.mp3"
+dest_files=["res://.godot/imported/Marine voice (random upon click) - I dont have time for games.mp3-78ca098e21e9fd6eeeffa5a135a38f76.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,11 +1,79 @@
-[gd_scene load_steps=4 format=3 uid="uid://d4g2vnbt1kwce"]
+[gd_scene load_steps=18 format=3 uid="uid://d4g2vnbt1kwce"]
 
 [ext_resource type="Script" uid="uid://d3cjs8u3jv63g" path="res://scenes/projectiles/projectile.gd" id="1_wndne"]
 [ext_resource type="Texture2D" uid="uid://b0tdj2jx8pe26" path="res://assets/projectile.png" id="2_l3el7"]
+[ext_resource type="Texture2D" uid="uid://s2x0pdp8skxo" path="res://assets/bullets/sprite bullet state 1.png" id="3_l3el7"]
+[ext_resource type="Texture2D" uid="uid://crc8l6bw5b6j" path="res://assets/bullets/sprite bullet state 3.png" id="4_a8d2p"]
+[ext_resource type="Texture2D" uid="uid://dj01k1iv4f5ur" path="res://assets/bullets/sprite bullet state 2.png" id="5_wq63x"]
+[ext_resource type="Texture2D" uid="uid://w88g87tdxcgv" path="res://assets/bullets/sprite bullet state 4.png" id="6_7kxpu"]
+[ext_resource type="Texture2D" uid="uid://badnaw33ksrfe" path="res://assets/bullets/sprite bullet state 5.png" id="7_vgwnf"]
+[ext_resource type="Texture2D" uid="uid://bxyrgbhqt41hg" path="res://assets/bullets/sprite bullet state 6.png" id="8_kaa5c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2dulq"]
 radius = 8.0
 height = 168.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mp3hp"]
+atlas = ExtResource("3_l3el7")
+region = Rect2(0, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eeh78"]
+atlas = ExtResource("4_a8d2p")
+region = Rect2(0, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8cenh"]
+atlas = ExtResource("5_wq63x")
+region = Rect2(0, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctcxy"]
+atlas = ExtResource("6_7kxpu")
+region = Rect2(0, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75wl1"]
+atlas = ExtResource("7_vgwnf")
+region = Rect2(0, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6u51s"]
+atlas = ExtResource("8_kaa5c")
+region = Rect2(0, 0, 400, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oc4rm"]
+atlas = ExtResource("3_l3el7")
+region = Rect2(0, 0, 400, 300)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wndne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mp3hp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eeh78")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8cenh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctcxy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75wl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6u51s")
+}],
+"loop": true,
+"name": &"Explode",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oc4rm")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [node name="Projectile" type="Area2D"]
 script = ExtResource("1_wndne")
@@ -19,4 +87,13 @@ texture = ExtResource("2_l3el7")
 [node name="DestructorTimer" type="Timer" parent="."]
 wait_time = 5.0
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.125, 0.125)
+sprite_frames = SubResource("SpriteFrames_wndne")
+animation = &"Explode"
+frame_progress = 0.326226
+speed_scale = 1.5
+
 [connection signal="timeout" from="DestructorTimer" to="." method="_on_destructor_timer_timeout"]
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

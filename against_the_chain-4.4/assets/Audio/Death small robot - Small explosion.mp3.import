@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bjwtiw28o13td"
+path="res://.godot/imported/Death small robot - Small explosion.mp3-2ef3ea88c8c52826d3b402417df0c115.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Death small robot - Small explosion.mp3"
+dest_files=["res://.godot/imported/Death small robot - Small explosion.mp3-2ef3ea88c8c52826d3b402417df0c115.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

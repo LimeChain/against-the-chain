@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dj5f8gasor36l"
+path="res://.godot/imported/Player taking damage - Punches on the human player or human NPC.mp3-48026bd33911e6b393d55835e18ecc3c.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Player taking damage - Punches on the human player or human NPC.mp3"
+dest_files=["res://.godot/imported/Player taking damage - Punches on the human player or human NPC.mp3-48026bd33911e6b393d55835e18ecc3c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

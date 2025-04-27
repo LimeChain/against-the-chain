@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cw7sbg0r316b3"
+path="res://.godot/imported/Enemy shooting bursts of fire 3 (metalic sound).mp3-b6050df991de6924855e5c4e21a5e4b3.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Enemy shooting bursts of fire 3 (metalic sound).mp3"
+dest_files=["res://.godot/imported/Enemy shooting bursts of fire 3 (metalic sound).mp3-b6050df991de6924855e5c4e21a5e4b3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

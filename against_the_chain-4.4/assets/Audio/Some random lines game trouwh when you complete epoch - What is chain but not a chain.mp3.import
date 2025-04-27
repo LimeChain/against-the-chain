@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ccpxoi0i2e7pg"
+path="res://.godot/imported/Some random lines game trouwh when you complete epoch - What is chain but not a chain.mp3-07231e13364fcc6ee55e0c6b06356511.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Some random lines game trouwh when you complete epoch - What is chain but not a chain.mp3"
+dest_files=["res://.godot/imported/Some random lines game trouwh when you complete epoch - What is chain but not a chain.mp3-07231e13364fcc6ee55e0c6b06356511.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

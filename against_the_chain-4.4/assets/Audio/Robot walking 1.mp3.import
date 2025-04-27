@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dmquqyiiy0nfw"
+path="res://.godot/imported/Robot walking 1.mp3-3a40f69b709afbaf325c0bf95256561d.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Robot walking 1.mp3"
+dest_files=["res://.godot/imported/Robot walking 1.mp3-3a40f69b709afbaf325c0bf95256561d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

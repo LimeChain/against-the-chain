@@ -1,10 +1,11 @@
 extends CharacterBody2D
 
 const MAX_HEALTH = 100
-const SPEED = 1000
 const DAMAGE_INTERVAL = 1
 const POSITION_UPDATE_INTERVAL = 0.05  # Update position every 0.1 seconds
-
+const MIN_SPEED = 500
+const MAX_SPEED = 1000
+var speed = 1000
 var can_shoot:bool = true
 var health: int
 var takes_damage = false
@@ -23,14 +24,18 @@ signal player_dead()
 func _ready() -> void:
 	position= Vector2.ZERO
 	health = MAX_HEALTH
+	queue_redraw()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if not $"..".has_game_started:
+		return
 	normal = Input.get_vector("left", "right","up","down")
 	handle_direction()
-	velocity = normal * SPEED
+	velocity = normal * speed
 	move_and_slide()
+	
 	shoot(delta)
 	
 	# Update position periodically
@@ -43,7 +48,7 @@ func _process(delta: float) -> void:
 		time_since_damage = 0
 		if takes_damage:
 			health-=damage_taken_amount
-			print(health)
+			queue_redraw()
 			if health <=0:
 				player_dead.emit()
 				print("player is dead")
@@ -51,14 +56,16 @@ func _process(delta: float) -> void:
 	
 
 func shoot(delta:float)-> void:
+	
 	if Input.is_action_pressed("shoot") and can_shoot:
+		speed = MIN_SPEED
 		can_shoot = false
 		$ShootTimer.start()
 		var projectile_start = $ShootingPoints/ShootingPoint
-		
 		var direction = (get_global_mouse_position() - position).normalized()
 		player_shoot.emit(projectile_start.global_position, direction)
-
+	if Input.is_action_just_released("shoot"):
+		speed = MAX_SPEED
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true # Replace with function body.
@@ -138,3 +145,21 @@ func _update_position_to_server() -> void:
 			"rotation": rotation
 		}
 		$"/root/MultiplayerManager".update_player_state.rpc(player_data)
+func _draw():
+	var health := health as int
+	var max_health = MAX_HEALTH
+	var BAR_WIDTH = 100
+	var BAR_HEIGHT = 12
+	var BAR_OFFSET = Vector2(0, -128)
+
+	draw_rect(
+		Rect2(-BAR_WIDTH/2 + BAR_OFFSET.x, BAR_OFFSET.y,
+			  BAR_WIDTH, BAR_HEIGHT),
+		Color(0, 0, 0, 0.5)
+	)
+	var ratio = float(health) / float(max_health)
+	draw_rect(
+		Rect2(-BAR_WIDTH/2 + BAR_OFFSET.x, BAR_OFFSET.y,
+			  BAR_WIDTH * ratio, BAR_HEIGHT),
+		Color(1, 0, 0)
+	)

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dfswut8ubswjq"
+path="res://.godot/imported/Marine voice (random rare upon enemy kill) - I used to be adventurer like you.mp3-b4094c241a9f3e3beeedc22f286c2d12.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Marine voice (random rare upon enemy kill) - I used to be adventurer like you.mp3"
+dest_files=["res://.godot/imported/Marine voice (random rare upon enemy kill) - I used to be adventurer like you.mp3-b4094c241a9f3e3beeedc22f286c2d12.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

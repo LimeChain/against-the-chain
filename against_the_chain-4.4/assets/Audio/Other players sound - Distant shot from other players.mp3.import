@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bvj5ypu3cqoru"
+path="res://.godot/imported/Other players sound - Distant shot from other players.mp3-9cf8213f91e2b6c7e710e2bb1bac4ced.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Other players sound - Distant shot from other players.mp3"
+dest_files=["res://.godot/imported/Other players sound - Distant shot from other players.mp3-9cf8213f91e2b6c7e710e2bb1bac4ced.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

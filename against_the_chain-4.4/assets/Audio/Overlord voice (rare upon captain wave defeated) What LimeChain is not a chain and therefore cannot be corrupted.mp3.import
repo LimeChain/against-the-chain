@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://crem3kv7i47ta"
+path="res://.godot/imported/Overlord voice (rare upon captain wave defeated) What LimeChain is not a chain and therefore cannot be corrupted.mp3-8e742400e1302f3c1782e83126253900.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Overlord voice (rare upon captain wave defeated) What LimeChain is not a chain and therefore cannot be corrupted.mp3"
+dest_files=["res://.godot/imported/Overlord voice (rare upon captain wave defeated) What LimeChain is not a chain and therefore cannot be corrupted.mp3-8e742400e1302f3c1782e83126253900.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

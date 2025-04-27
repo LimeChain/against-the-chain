@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c6vaowgexxf4t"
+path="res://.godot/imported/Overlord (often upon other player death) One of your fellows just died.mp3-339e046aef867adb49ed3a6f2bc12fdd.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Overlord (often upon other player death) One of your fellows just died.mp3"
+dest_files=["res://.godot/imported/Overlord (often upon other player death) One of your fellows just died.mp3-339e046aef867adb49ed3a6f2bc12fdd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

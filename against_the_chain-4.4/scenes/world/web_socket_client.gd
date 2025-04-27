@@ -39,8 +39,9 @@ func on_socket_ready(_sid: String):
 
 func on_socket_connect(_payload: Variant, _name_space, error: bool):
 	if error:
-		print("Failed to connect to backend!")
+		print("Failed to connect to backend!")	
 	else:
+		socket_connected.emit()
 		print("Socket connected")
 
 

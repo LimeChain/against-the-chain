@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bsj6qtl0s2140"
+path="res://.godot/imported/Overlord when Captain has been spawned.mp3-0abbd5bdbc783b383d8f31009bc22aa4.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Overlord when Captain has been spawned.mp3"
+dest_files=["res://.godot/imported/Overlord when Captain has been spawned.mp3-0abbd5bdbc783b383d8f31009bc22aa4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

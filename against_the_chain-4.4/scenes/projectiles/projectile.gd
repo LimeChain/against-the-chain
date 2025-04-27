@@ -1,6 +1,6 @@
 extends Area2D
 
-const SPEED = 1200
+var speed = 1200
 
 var direction_to_shoot:Vector2
 
@@ -9,7 +9,7 @@ func _ready():
 	$DestructorTimer.start()
 	
 func _process(delta: float) -> void:
-	position += direction_to_shoot * SPEED * delta
+	position += direction_to_shoot * speed * delta
 
 func _on_destructor_timer_timeout() -> void:
 	destroy.emit(self)

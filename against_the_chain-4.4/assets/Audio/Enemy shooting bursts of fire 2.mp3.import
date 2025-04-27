@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dj7knybl2ixxw"
+path="res://.godot/imported/Enemy shooting bursts of fire 2.mp3-3f3ee8bcfc30090d51abb96f570e7090.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Enemy shooting bursts of fire 2.mp3"
+dest_files=["res://.godot/imported/Enemy shooting bursts of fire 2.mp3-3f3ee8bcfc30090d51abb96f570e7090.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

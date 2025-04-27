@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dhiuan6oectix"
+path="res://.godot/imported/Player basic pistol shot.mp3-b9d9f94d70ebb8722af80bc9e044bb1a.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Player basic pistol shot.mp3"
+dest_files=["res://.godot/imported/Player basic pistol shot.mp3-b9d9f94d70ebb8722af80bc9e044bb1a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

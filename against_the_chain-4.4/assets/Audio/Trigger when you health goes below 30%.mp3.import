@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bv6brhh31a88y"
+path="res://.godot/imported/Trigger when you health goes below 30%.mp3-e989010ed1de78996565e63b4124a029.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Trigger when you health goes below 30%.mp3"
+dest_files=["res://.godot/imported/Trigger when you health goes below 30%.mp3-e989010ed1de78996565e63b4124a029.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

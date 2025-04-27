@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://kbbhyhgaoh8a"
+path="res://.godot/imported/Marine - (after kill rare random) I can shoot this crap all day long.mp3-fcd716cd96ef1756678ec0f6a736002b.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Marine - (after kill rare random) I can shoot this crap all day long.mp3"
+dest_files=["res://.godot/imported/Marine - (after kill rare random) I can shoot this crap all day long.mp3-fcd716cd96ef1756678ec0f6a736002b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

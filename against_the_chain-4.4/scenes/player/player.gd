@@ -35,6 +35,7 @@ func _process(delta: float) -> void:
 	handle_direction()
 	velocity = normal * speed
 	move_and_slide()
+	
 	shoot(delta)
 	
 	# Update position periodically
@@ -55,12 +56,12 @@ func _process(delta: float) -> void:
 	
 
 func shoot(delta:float)-> void:
+	
 	if Input.is_action_pressed("shoot") and can_shoot:
 		speed = MIN_SPEED
 		can_shoot = false
 		$ShootTimer.start()
 		var projectile_start = $ShootingPoints/ShootingPoint
-		
 		var direction = (get_global_mouse_position() - position).normalized()
 		player_shoot.emit(projectile_start.global_position, direction)
 	if Input.is_action_just_released("shoot"):

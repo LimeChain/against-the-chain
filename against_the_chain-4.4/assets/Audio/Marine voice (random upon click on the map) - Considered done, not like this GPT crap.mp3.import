@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bp8662jmu082j"
+path="res://.godot/imported/Marine voice (random upon click on the map) - Considered done, not like this GPT crap.mp3-d4c0a52959141cb0d36a929fc79e97c5.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Marine voice (random upon click on the map) - Considered done, not like this GPT crap.mp3"
+dest_files=["res://.godot/imported/Marine voice (random upon click on the map) - Considered done, not like this GPT crap.mp3-d4c0a52959141cb0d36a929fc79e97c5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

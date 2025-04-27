@@ -22,7 +22,7 @@ var has_game_started = false
 func _ready() -> void:
 	camera = $Player/Camera2D
 	camera.zoom = Vector2(ZOOM_MIN, ZOOM_MIN)
-	
+	$Player/AudioManager/BackgroundMusic.play()
 
 func _process(delta:float):
 	if not has_game_started:

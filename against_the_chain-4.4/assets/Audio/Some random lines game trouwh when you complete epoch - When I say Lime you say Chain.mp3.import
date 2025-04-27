@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dkpk8jcr4sf0v"
+path="res://.godot/imported/Some random lines game trouwh when you complete epoch - When I say Lime you say Chain.mp3-cd59945ad83e7f106c8cf39f7eb45c6e.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Some random lines game trouwh when you complete epoch - When I say Lime you say Chain.mp3"
+dest_files=["res://.godot/imported/Some random lines game trouwh when you complete epoch - When I say Lime you say Chain.mp3-cd59945ad83e7f106c8cf39f7eb45c6e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

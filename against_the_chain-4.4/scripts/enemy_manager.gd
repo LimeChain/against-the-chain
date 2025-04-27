@@ -1,5 +1,9 @@
 extends Node2D
- 
+
+signal enemy_shoot
+signal captain_spawn
+signal enemy_dead
+signal normal_enemy
 @export var max_enemies = 100
 var enemy_scene: PackedScene
 var captain_enemy_scene: PackedScene
@@ -20,9 +24,11 @@ func spawn_enemy(position: Vector2):
 	if normal_enemies_counter == 5 and not enemies.any(func (enemy): return enemy.name == "CaptainEnemy"):
 		is_captain_ritual = true
 		enemy = captain_enemy_scene.instantiate()
-		normal_enemies_counter = 0 
+		normal_enemies_counter = 0
+		captain_spawn.emit()
 	else: 
 		enemy = enemy_scene.instantiate()
+		normal_enemy.emit()
 	normal_enemies_counter += 1
 	if is_captain_ritual:
 		if find_captain(enemies):
@@ -36,6 +42,8 @@ func spawn_enemy(position: Vector2):
 	add_child(enemy)
 
 func remove_enemy(enemy: Node):
+	if enemy.name == "Enemy":
+		enemy_dead.emit()
 	enemies.erase(enemy)
 	enemy.queue_free()
 
@@ -59,3 +67,4 @@ func find_captain(enemies:Array):
 func _on_enemy_shoot(position:Vector2, enemy_pos:Vector2):
 	var direction = ($"../Player".position - enemy_pos).normalized()
 	$"../EnemyProjectileManager".spawn_projectile(position,direction)
+	enemy_shoot.emit()

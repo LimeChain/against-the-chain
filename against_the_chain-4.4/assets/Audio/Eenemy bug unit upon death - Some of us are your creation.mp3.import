@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b5iqy7mh0ltvd"
+path="res://.godot/imported/Eenemy bug unit upon death - Some of us are your creation.mp3-9ce7805c88c04e102c678ef3a09fae96.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Eenemy bug unit upon death - Some of us are your creation.mp3"
+dest_files=["res://.godot/imported/Eenemy bug unit upon death - Some of us are your creation.mp3-9ce7805c88c04e102c678ef3a09fae96.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

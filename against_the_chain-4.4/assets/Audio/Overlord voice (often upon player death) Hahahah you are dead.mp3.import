@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bgd0pe7fuji71"
+path="res://.godot/imported/Overlord voice (often upon player death) Hahahah you are dead.mp3-3a8540446456e6d7b56b192a9ae7967c.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Overlord voice (often upon player death) Hahahah you are dead.mp3"
+dest_files=["res://.godot/imported/Overlord voice (often upon player death) Hahahah you are dead.mp3-3a8540446456e6d7b56b192a9ae7967c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

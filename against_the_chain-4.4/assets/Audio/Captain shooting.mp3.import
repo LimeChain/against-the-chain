@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cngtytvy86287"
+path="res://.godot/imported/Captain shooting.mp3-3d1c2d5077a3350d0aa7f9a7d5f0b8f8.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Captain shooting.mp3"
+dest_files=["res://.godot/imported/Captain shooting.mp3-3d1c2d5077a3350d0aa7f9a7d5f0b8f8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

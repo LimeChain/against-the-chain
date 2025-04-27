@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://blk3pq0v7xf8"
+path="res://.godot/imported/Bullet hits armor 3.mp3-57152a34bc48cf007c503bfaa3a4b68d.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Bullet hits armor 3.mp3"
+dest_files=["res://.godot/imported/Bullet hits armor 3.mp3-57152a34bc48cf007c503bfaa3a4b68d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

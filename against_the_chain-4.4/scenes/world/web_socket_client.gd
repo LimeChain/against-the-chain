@@ -9,6 +9,7 @@ signal block_reward(data: String)
 signal block_timestamp(data: int)
 signal block_transactionCount (data:int)
 signal block_totalTransactions (data: int)
+signal block_leader (leader: String)
 signal socket_connected
 func _ready():
 	# prepare URL
@@ -47,9 +48,11 @@ func on_socket_connect(_payload: Variant, _name_space, error: bool):
 
 
 func on_socket_event(event_name: String, block_data: Variant, _name_space):
+	print("event_name %s" % block_data)
 	block_slot.emit(block_data.slot)
 	block_blockhash.emit(block_data.blockhash)
 	block_reward.emit(block_data.reward)
 	block_timestamp.emit(block_data.timestamp)
 	block_transactionCount.emit(block_data.transactionCount)
 	block_totalTransactions.emit(block_data.totalTransactions)
+	block_leader.emit(block_data.leader)

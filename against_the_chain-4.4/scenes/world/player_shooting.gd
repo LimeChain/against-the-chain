@@ -13,3 +13,7 @@ func _process(delta: float) -> void:
 
 func _on_player_player_shoot(pos: Vector2, direction: Vector2) -> void:
 	play()
+
+
+func _on_enemy_manager_enemy_shoot() -> void:
+	pass # Replace with function body.

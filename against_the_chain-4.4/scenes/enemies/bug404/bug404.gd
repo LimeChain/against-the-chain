@@ -1,18 +1,19 @@
 extends CharacterBody2D
 
+var projectile_scene = preload("res://scenes/projectiles/projectile.tscn")
+
 @export var speed        := 200
 @export var max_health   := 3
 var health               := max_health
 @export var damage       := 1
 var player
 var can_shoot := true
+var sprite_direction:Vector2
+
 # Health‐bar constants
 const BAR_WIDTH  := 100
 const BAR_HEIGHT := 12
 const BAR_OFFSET := Vector2(0, -128)
-var can_move := false
-var sprite_direction:Vector2
-
 signal dead(enemy: CharacterBody2D)
 signal shoot (position: Vector2, enemy_pos: Vector2)
 
@@ -21,15 +22,20 @@ func _ready() -> void:
 	player = get_node("/root/World/Player")
 	# draw the bar once at start
 	queue_redraw()
-	$CaptainChargeTimer.start()
 	$ShootTimer.start()
-	
+
 func _process(delta: float) -> void:
 	handle_direction(player.position.normalized())
-	if can_move:
-		var direction = (player.position-position).normalized()
-		velocity = direction * speed
-		move_and_slide()
+	var enemy_manager = get_parent()
+	var direction
+	if enemy_manager.is_captain_ritual:
+		var captain = enemy_manager.find_captain(enemy_manager.enemies)
+		direction = (captain.position-position).normalized()
+	else:
+		direction = (player.position-position).normalized()
+	velocity = direction * speed
+	move_and_slide()
+	# shoot
 	if can_shoot:
 		shoot.emit($ShootingPoint.global_position, position)
 		can_shoot = false
@@ -53,18 +59,17 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("projectiles"):
 		area.destroy.emit(area)
 		health = max(health - damage, 0)
+		speed/=2
 		queue_redraw()      # ← schedule a redraw of _draw()	
 		if health == 0:
+			speed=0
 			$AnimatedSprite2D.animation_looped.connect(func ():
 				dead.emit(self)
 			)
 		
-
-
-func _on_captain_charge_timer_timeout() -> void:
-	can_move = true
-	var enemy_manager = get_parent()
-	enemy_manager.is_captain_ritual = false
+func _on_area_exited(area: Area2D):
+	if area.is_in_group("projectiles"):
+		speed *= 2
 
 func handle_direction(direction: Vector2):
 	var animation = $AnimatedSprite2D
@@ -86,5 +91,7 @@ func handle_direction(direction: Vector2):
 	elif health <=0 and direction.x < 0:
 		animation.play("DestroyLeft")
 
+
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true
+	

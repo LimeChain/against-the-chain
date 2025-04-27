@@ -18,6 +18,11 @@ const obstacle: PackedScene = preload("res://scenes/obstacles/obstacle.tscn")
 var camera: Camera2D
 var can_spawn = true
 var has_game_started = false
+
+signal spawn_default_enemy (bounds: Vector2)
+signal spawn_captain_enemy (bounds: Vector2)
+signal spawn_bug404_enemy(bounds: Vector2)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	camera = $Player/Camera2D
@@ -27,7 +32,7 @@ func _ready() -> void:
 func _process(delta:float):
 	if not has_game_started:
 		return
-	_spawn_enemies()
+	#_spawn_enemies()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -40,17 +45,16 @@ func _input(event: InputEvent) -> void:
 					camera.zoom += Vector2(zoom_speed, zoom_speed)
 
 
-func _spawn_enemies():
-	if can_spawn:
+func _spawn_enemies(type: String):
 		var north_west_limit = $SpawnLimits/NorthWest.position
 		var south_east_limit = $SpawnLimits/SouthEast.position
 		var spawn_position = get_random_point_in_rect(north_west_limit, south_east_limit)
-		$EnemyManager.spawn_enemy(spawn_position)
-		can_spawn = false
-	
-
-func _on_spawn_timer_timeout() -> void:
-	can_spawn = true
+		if (type == "captain"):
+			$EnemyManager.spawn_captain_enemy(spawn_position)
+		elif (type=="bug"):
+			$EnemyManager.spawn_bug_enemy(spawn_position)
+		else:
+			$EnemyManager.spawn_default_enemy(spawn_position)
 
 func get_random_point_in_rect(p1: Vector2, p2: Vector2) -> Vector2:
 	var min_x = min(p1.x, p2.x)
@@ -71,3 +75,10 @@ func add_random_obstacles () -> void:
 func _on_web_socket_client_socket_connected() -> void:
 	$LoadingScreen.visible = false
 	has_game_started = true
+	
+func _on_web_socket_client_block_blockhash(data: String) -> void:
+	pass # Replace with function body.
+
+
+func spawn_enemy(type: String) -> void:
+	pass # Replace with function body.
